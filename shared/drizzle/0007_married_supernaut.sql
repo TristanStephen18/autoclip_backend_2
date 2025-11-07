@@ -1,0 +1,1 @@
+ALTER TABLE "clips" ALTER COLUMN "job_id" SET DATA TYPE varchar;

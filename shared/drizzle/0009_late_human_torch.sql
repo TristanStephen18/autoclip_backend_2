@@ -1,0 +1,1 @@
+ALTER TABLE "clips" ADD COLUMN "favourite" boolean DEFAULT false;

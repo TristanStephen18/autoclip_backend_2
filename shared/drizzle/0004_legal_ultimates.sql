@@ -1,0 +1,1 @@
+ALTER TABLE "clips" ADD COLUMN "description" text DEFAULT '' NOT NULL;

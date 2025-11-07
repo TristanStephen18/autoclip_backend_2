@@ -1,0 +1,1 @@
+ALTER TABLE "clips" ADD COLUMN "duration" integer DEFAULT 8 NOT NULL;

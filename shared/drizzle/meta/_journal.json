@@ -1,0 +1,104 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1759674446854,
+      "tag": "0000_normal_chronomancer",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1759837761246,
+      "tag": "0001_absurd_jigsaw",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1759843113364,
+      "tag": "0002_shocking_vivisector",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1760000844712,
+      "tag": "0003_omniscient_naoko",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1760015513016,
+      "tag": "0004_legal_ultimates",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1760083338502,
+      "tag": "0005_real_thunderbolts",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1760093800197,
+      "tag": "0006_gifted_joshua_kane",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1760093951303,
+      "tag": "0007_married_supernaut",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1761753504664,
+      "tag": "0008_orange_smasher",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1762256840345,
+      "tag": "0009_late_human_torch",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1762276638453,
+      "tag": "0010_living_blade",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1762353820450,
+      "tag": "0011_many_forgotten_one",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1762424207003,
+      "tag": "0012_gray_lilandra",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1762434514668,
+      "tag": "0013_nosy_moonstone",
+      "breakpoints": true
+    }
+  ]
+}
