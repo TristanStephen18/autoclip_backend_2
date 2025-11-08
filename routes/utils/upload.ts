@@ -29,7 +29,7 @@ router.post(
       // ✅ 2. Upload to Supabase Storage
       const { error: uploadError } = await supabase.storage
         .from(SUPABASE_BUCKET)
-        .upload(`user_${userId}/${fileName}`, fileBuffer, {
+        .upload(`videos/${fileName}`, fileBuffer, {
           cacheControl: "3600",
           upsert: false,
           contentType: req.file.mimetype,
