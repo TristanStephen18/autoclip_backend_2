@@ -70,7 +70,7 @@ app.get("/api/hello", (req, res) => {
 
 app.listen(3000, () => {
   const COOKIES_PATH = "/tmp/cookies.txt";
-  const SECRET_COOKIES_PATH = "/etc/secrets/cookies.txt"; // your Render secret mount
+  const SECRET_COOKIES_PATH = "/etc/secrets/cookies1.txt"; // your Render secret mount
 
   // Copy cookies to /tmp at runtime if not already there
   if (fs.existsSync(SECRET_COOKIES_PATH)) {
