@@ -23,7 +23,19 @@ router.post(
 
       // ✅ 1. Prepare upload data
       const fileBuffer = req.file.buffer; // ✅ keep only this one
-      const fileName = `${Date.now()}_${sanitize(req.file.originalname, {replacement: "_"})}`;
+      const originalName = req.file.originalname || "video.mp4";
+
+      // Step 1: Sanitize basic filesystem-unsafe characters
+      let safeName = sanitize(originalName, { replacement: "_" });
+
+      // Step 2: Remove or replace any remaining unsafe URL/S3 characters
+      safeName = safeName
+        .replace(/[&?#%'":;+\[\]{}<>\\^$!`~|=]/g, "_") // replace these with underscores
+        .replace(/\s+/g, "_") // replace spaces with _
+        .replace(/[^\x20-\x7E]/g, ""); // remove non-ASCII characters
+
+      // Step 3: Prepend timestamp
+      const fileName = `${Date.now()}_${safeName}`;
 
       console.log("📤 Uploading video to Supabase Storage...");
 
@@ -38,7 +50,12 @@ router.post(
 
       if (uploadError) {
         console.error("❌ Supabase upload failed:", uploadError);
-        return res.status(500).json({ error: "Supabase upload failed", details: uploadError.message });
+        return res
+          .status(500)
+          .json({
+            error: "Supabase upload failed",
+            details: uploadError.message,
+          });
       }
 
       console.log("✅ Uploaded to Supabase successfully!");
@@ -49,7 +66,8 @@ router.post(
         .getPublicUrl(`user_${userId}/${fileName}`);
 
       const publicUrl = publicUrlData?.publicUrl;
-      if (!publicUrl) throw new Error("Failed to generate public URL from Supabase.");
+      if (!publicUrl)
+        throw new Error("Failed to generate public URL from Supabase.");
       console.log("🌐 Public URL:", publicUrl);
 
       // ✅ 4. Get video duration (temporarily save buffer to /temp)
@@ -60,7 +78,6 @@ router.post(
       await fs.writeFile(tempFilePath, fileBuffer);
       const video_duration = await getVideoDuration(tempFilePath);
       await fs.unlink(tempFilePath).catch(() => {});
-
 
       // ✅ 6. Respond to client
       return res.status(200).json({
