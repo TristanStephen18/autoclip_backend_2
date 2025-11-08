@@ -5,6 +5,7 @@ import fs from "fs/promises";
 import { getVideoDuration } from "./duration.ts";
 import { requireAuth } from "../../utils/authmiddleware.ts";
 import { supabase, SUPABASE_BUCKET } from "./supabaseClient.ts";
+import sanitize from "sanitize-filename";
 
 const router = Router();
 
@@ -22,7 +23,7 @@ router.post(
 
       // ✅ 1. Prepare upload data
       const fileBuffer = req.file.buffer; // ✅ keep only this one
-      const fileName = `${Date.now()}_${req.file.originalname.replace(/\s+/g, "_")}`;
+      const fileName = `${Date.now()}_${sanitize(req.file.filename, {replacement: "_"})}`;
 
       console.log("📤 Uploading video to Supabase Storage...");
 
