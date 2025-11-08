@@ -116,7 +116,6 @@ router.post("/download-all", async (req, res) => {
 router.post("/convert", async (req, res) => {
   const { url } = req.body;
   if (!url) return res.status(400).json({ error: "No URL provided" });
-  const cookiesPath = path.join(process.cwd(), "server", "cookies.txt");
 
   try {
     const timestamp = Date.now();
@@ -135,7 +134,7 @@ router.post("/convert", async (req, res) => {
       output: videoFile,
       noWarnings: true,
       noPart: true,
-      cookies: cookiesPath,
+      cookies: "/etc/secrets/cookies.txt",
     });
 
     console.log("📥 Downloading audio stream...");
@@ -144,7 +143,7 @@ router.post("/convert", async (req, res) => {
       output: audioFile,
       noWarnings: true,
       noPart: true,
-      cookies: cookiesPath,
+      cookies: "/etc/secrets/cookies.txt",
     });
 
     console.log("🎬 Merging video + audio with ffmpeg...");
@@ -182,7 +181,7 @@ router.post("/convert", async (req, res) => {
       dumpSingleJson: true,
       noWarnings: true,
       youtubeSkipDashManifest: true,
-      cookies: cookiesPath,
+      cookies: "/etc/secrets/cookies.txt",
     });
 
     res.json({
