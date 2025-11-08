@@ -140,7 +140,10 @@ router.post("/convert", async (req, res) => {
       output: videoFile,
       noWarnings: true,
       noPart: true,
-      cookies: TMP_COOKIES_PATH,
+      cookies: "/tmp/cookies.txt",
+      userAgent:
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
+      referer: "https://www.youtube.com/"
     });
 
     console.log("📥 Downloading audio stream...");
@@ -149,7 +152,10 @@ router.post("/convert", async (req, res) => {
       output: audioFile,
       noWarnings: true,
       noPart: true,
-      cookies: TMP_COOKIES_PATH,
+      cookies: "/tmp/cookies.txt",
+      userAgent:
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
+      referer: "https://www.youtube.com/"
     });
 
     console.log("🎬 Merging video + audio with ffmpeg...");
@@ -187,7 +193,10 @@ router.post("/convert", async (req, res) => {
       dumpSingleJson: true,
       noWarnings: true,
       youtubeSkipDashManifest: true,
-      cookies: TMP_COOKIES_PATH,
+      cookies: "/tmp/cookies.txt",
+      userAgent:
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
+      referer: "https://www.youtube.com/"
     });
 
     res.json({

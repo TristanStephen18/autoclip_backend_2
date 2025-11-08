@@ -14,8 +14,9 @@ import bodyParser from "body-parser";
 import Ffmpegroute from "./ffmpegrenderingtrial.ts";
 import enhanceRoute from "./routes/enhanceRoute.ts";
 import session from "express-session";
-import passport from 'passport';
-import GoogleRoutes  from "./routes/google.ts";
+import passport from "passport";
+import GoogleRoutes from "./routes/google.ts";
+import fs from "fs";
 
 const app = express();
 dotenv.config();
@@ -35,7 +36,6 @@ app.use(
   })
 );
 
-
 app.use(passport.initialize());
 app.use(passport.session());
 //routes
@@ -51,7 +51,7 @@ app.use("/api/clips", clipsRoutes);
 app.use("/api/zip", zipRoute);
 app.use(`/api/ffmpeg`, Ffmpegroute);
 app.use(`/api/authenticate`, GoogleRoutes);
-app.use('/api/enhance', enhanceRoute);
+app.use("/api/enhance", enhanceRoute);
 
 //static routes
 app.use(
@@ -69,5 +69,15 @@ app.get("/api/hello", (req, res) => {
 });
 
 app.listen(3000, () => {
+  const COOKIES_PATH = "/tmp/cookies.txt";
+  const SECRET_COOKIES_PATH = "/etc/secrets/cookies.txt"; // your Render secret mount
+
+  // Copy cookies to /tmp at runtime if not already there
+  if (fs.existsSync(SECRET_COOKIES_PATH)) {
+    fs.copyFileSync(SECRET_COOKIES_PATH, COOKIES_PATH);
+    console.log("✅ Copied cookies.txt to writable /tmp/");
+  } else {
+    console.warn("⚠️ No cookies.txt found at /etc/secrets/cookies.txt");
+  }
   console.log("server is listening on port", 3000);
 });
