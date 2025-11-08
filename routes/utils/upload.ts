@@ -23,7 +23,7 @@ router.post(
 
       // ✅ 1. Prepare upload data
       const fileBuffer = req.file.buffer; // ✅ keep only this one
-      const fileName = `${Date.now()}_${sanitize(req.file.filename, {replacement: "_"})}`;
+      const fileName = `${Date.now()}_${sanitize(req.file.originalname, {replacement: "_"})}`;
 
       console.log("📤 Uploading video to Supabase Storage...");
 
