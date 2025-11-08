@@ -115,7 +115,7 @@ router.post("/download-all", async (req, res) => {
 });
 router.post("/convert", async (req, res) => {
   const COOKIES_PATH = "/etc/secrets/cookies.txt"; // read-only
-  const TMP_COOKIES_PATH = "/tmp/cookies.txt"; // writable copy
+  const TMP_COOKIES_PATH = "/tmp/cookies1.txt"; // writable copy
 
   if (fs.existsSync(COOKIES_PATH)) {
     fs.copyFileSync(COOKIES_PATH, TMP_COOKIES_PATH);
