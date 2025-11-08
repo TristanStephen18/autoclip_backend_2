@@ -114,6 +114,12 @@ router.post("/download-all", async (req, res) => {
   }
 });
 router.post("/convert", async (req, res) => {
+  const COOKIES_PATH = "/etc/secrets/cookies.txt"; // read-only
+  const TMP_COOKIES_PATH = "/tmp/cookies.txt"; // writable copy
+
+  if (fs.existsSync(COOKIES_PATH)) {
+    fs.copyFileSync(COOKIES_PATH, TMP_COOKIES_PATH);
+  }
   const { url } = req.body;
   if (!url) return res.status(400).json({ error: "No URL provided" });
 
@@ -134,7 +140,7 @@ router.post("/convert", async (req, res) => {
       output: videoFile,
       noWarnings: true,
       noPart: true,
-      cookies: "/etc/secrets/cookies.txt",
+      cookies: TMP_COOKIES_PATH,
     });
 
     console.log("📥 Downloading audio stream...");
@@ -143,7 +149,7 @@ router.post("/convert", async (req, res) => {
       output: audioFile,
       noWarnings: true,
       noPart: true,
-      cookies: "/etc/secrets/cookies.txt",
+      cookies: TMP_COOKIES_PATH,
     });
 
     console.log("🎬 Merging video + audio with ffmpeg...");
@@ -181,7 +187,7 @@ router.post("/convert", async (req, res) => {
       dumpSingleJson: true,
       noWarnings: true,
       youtubeSkipDashManifest: true,
-      cookies: "/etc/secrets/cookies.txt",
+      cookies: TMP_COOKIES_PATH,
     });
 
     res.json({
